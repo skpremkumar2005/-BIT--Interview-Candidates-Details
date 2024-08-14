@@ -1,0 +1,83 @@
+/* MyComponent.css */
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 7px;
+    background-color: white;
+  }
+  
+  .header {
+    justify-content: center;
+    align-items: center;
+    padding: 7px 16px;
+    width: 100%;
+    text-align: center;
+    font-size: 4xl;
+    color: black;
+    background-color: #f4f5f7;
+    max-width: 100%;
+  }
+  
+  .actions {
+    display: flex;
+    gap: 5px;
+    justify-content: space-between;
+    margin-top: 8px;
+    width: 100%;
+    max-width: 1808px;
+    flex-wrap: wrap;
+  }
+  
+  .search {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    background-color: #f4f5f7;
+    padding: 10px 20px;
+    border-radius: 30px;
+  }
+  
+  .search-icon {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .search-text {
+    font-size: 2xl;
+    color: black;
+  }
+  
+  .add-domain {
+    display: flex;
+    justify-content: center;
+    align-items: end;
+    padding: 20px;
+    font-size: 4xl;
+    color: white;
+    background-color: #4b0082;
+    border-radius: 30px;
+  }
+  
+  .section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-top: 30px;
+    width: 100%;
+    max-width: 800px;
+  }
+  
+  .item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    font-size: 7xl;
+    color: black;
+    background-color: #f4f5f7;
+    border-radius: 30px;
+  }
+  
+  /* Add more CSS styles as needed */
+  
