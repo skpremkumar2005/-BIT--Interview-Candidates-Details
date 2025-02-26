@@ -9,7 +9,6 @@ db();
 
 app.use(cors());
 
-
 // const route=express.Router();
 // app.use(route);
 app.use(express.json())
