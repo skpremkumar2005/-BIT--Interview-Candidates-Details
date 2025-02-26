@@ -6,7 +6,7 @@ router.use(express.json());
 async function post(req,res,users){
     try{const {name,email,age,education,domain}=req.body;
     const a= await User.em.find({email:email})
-    if(a.length!=0)return res.send("email duplicate");
+    if(a.length!=0)return res.status(400).send("email duplicate");
     if (!name || !email || !age || !education || !domain) {
         return res.status(400).json({ message: 'All fields are required.' });
       }
@@ -14,10 +14,10 @@ async function post(req,res,users){
      await  u.save();
      await new User.em({email}).save();
     console.log("finished");
-    res.send("finished");
+    res.json(await users.find());
   }
 
-  catch(error){console.log(error)}
+  catch(error){res.status(400).send("same mail");}
 }
 //------------------------------get request------------------------------------------------------------------
 async function get(req, res, user) {
@@ -27,13 +27,27 @@ async function get(req, res, user) {
         if (u.length === 0) {
             return res.json({ message: "No users found" });  
         }
-        res.json(u);
+        res.status(200).json(u);
     } catch (error) {
         console.log(error);
         res.status(500).send("No data available or server error");
     }
 }
-
+//-------------------------------------------------------------------------------------------------------------
+async function getid(req, res, user) {
+  try {
+   
+      const u = await user.findOne({ _id: req.params.id });
+     
+      if (u.length === 0) {
+          return res.json({ message: "No users found" });  
+      }
+      res.status(200).json(u);
+  } catch (error) {
+      console.log(error);
+      res.status(500).send("No data available or server error");
+  }
+}
 //------------------------------------------------------------------------------------------------------------
 async function put(req,res,user){
   try{
@@ -43,7 +57,7 @@ async function put(req,res,user){
     if(a!=b[0].email){
         const c=await User.em.find({email:a});
         // console.log(c);
-        if(c.length!=0)return res.send("duplicate email");
+        if(c.length!=0)return res.status(400).send("duplicate email");
         else{
              await new User.em({ email: a }).save();
              const e = await User.em.findOne({ email: b[0].email }); 
@@ -58,11 +72,12 @@ async function put(req,res,user){
     await user.findByIdAndUpdate(req.params.id, req.body, {
         new: true,
       })
-      res.status(200).send("updated");
+      res.status(200).json(await user.find());
       console.log("updated");
+     
   }
   catch(error){
-    console.log(error);
+    res.status(400).send("same mail");
   }
 }
 //------------------------------------------------------------------------------------------------------------
@@ -71,11 +86,13 @@ async function delet(req,res,user){
         const email=req.body.email;
         await  user.findByIdAndDelete(req.params.id);
         const e=await User.em.findOne({email:email});
-        await User.em.findByIdAndDelete(e._id);
-        res.send("successfull");
+        if(e){
+        await User.em.findByIdAndDelete(e._id);}
+        res.status(200).json(await user.find());
     }
     catch(error){
-        console.log("can not delete ",error)
+        res.status(400).send("same mail");
+        // console.log("can not delete ",error)
     }
 
 }
@@ -85,6 +102,7 @@ router.get('/',(req,res)=>{
 })
 //-------------------------------------------------------------------------------------------------------------
 router.get('/t&p',(req,res)=>{get(req,res,User.TP)})
+router.get('/t&p/:id',(req,res)=>{getid(req,res,User.TP)})
 router.put('/t&p/:id',(req,res)=>{put(req,res,User.TP)})
 router.post('/t&p', (req,res)=>{post(req,res,User.TP)});
 router.delete('/t&p/:id',(req,res)=>{delet(req,res,User.TP)})
@@ -97,7 +115,8 @@ router.delete('/iqac/:id',(req,res)=>{delet(req,res,User.iqac)})
 router.get('/dc',(req,res)=>{get(req,res,User.dc)})
 router.put('/dc/:id',(req,res)=>{put(req,res,User.dc)})
 router.post('/dc',(req,res)=>{post(req,res,User.dc)});
-router.delete('/dc/:id',(req,res)=>{delet(req,res,User.dc)})
+router.delete('/dc/:id',(req,res)=>{delet(req,res,User.dc)
+})
 //--------------------------------------------------------------------------------------------------------------
 router.get('/ps',(req,res)=>{get(req,res,User.ps)})
 router.put('/ps/:id',(req,res)=>{put(req,res,User.ps)})
