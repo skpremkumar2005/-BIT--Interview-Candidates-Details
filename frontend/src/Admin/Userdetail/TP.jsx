@@ -24,7 +24,7 @@ const UserDetail = () => {
       .catch((err) => {
         console.error('Error fetching user details:', err);
         setIsLoading(false);
-        setErrorMessage('Err');
+        setErrorMessage('Error');
       });
   }, [id]);
 
