@@ -3,22 +3,54 @@ const User=require('../../models/user');
 const router=express.Router();
 router.use(express.json());
 //------------------------------post request-----------------------------------------------------------------
-async function post(req,res,users){
-    try{const {name,email,age,education,domain}=req.body;
-    const a= await User.em.find({email:email})
-    if(a.length!=0)return res.status(400).send("email duplicate");
-    if (!name || !email || !age || !education || !domain) {
-        return res.status(400).json({ message: 'All fields are required.' });
-      }
-     const u=new users({name,email,age,education,domain})
-     await  u.save();
-     await new User.em({email}).save();
-    console.log("finished");
-    res.json(await users.find());
-  }
-
-  catch(error){res.status(400).send("same mail");}
-}
+async function post(req,res,Intern){
+    try {
+        const {
+          personal_details,
+          educational_details,
+          identification_documents,
+          internship_details,
+          skills_preferences,
+          banking_details,
+          emergency_contact,
+          additional_info
+        } = req.body;
+    
+        // Check for required fields
+        if (!personal_details || !personal_details.email || !educational_details || !internship_details) {
+          return res.status(400).json({ message: "Missing required fields." });
+        }
+    
+        // Check if email already exists
+        // const emailExists = await EmailTracker.findOne({ email: personal_details.email });
+        // if (emailExists) {
+        //   return res.status(400).json({ message: "Email already exists." });
+        // }
+    
+        // Create new Intern entry
+        const newIntern = new Intern({
+          personal_details,
+          educational_details,
+          identification_documents,
+          internship_details,
+          skills_preferences,
+          banking_details,
+          emergency_contact,
+          additional_info
+        });
+    
+        // Save intern details
+        await newIntern.save();
+    
+        // Save email to prevent duplicate registrations
+        // await new EmailTracker({ email: personal_details.email }).save();
+    
+        console.log("Intern registration completed.");
+        res.status(201).json(await Intern.find());
+      } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: "An error occurred." });
+      }}
 //------------------------------get request------------------------------------------------------------------
 async function get(req, res, user) {
     try {
@@ -51,24 +83,6 @@ async function getid(req, res, user) {
 //------------------------------------------------------------------------------------------------------------
 async function put(req,res,user){
   try{
-    const a= req.body.email;
-    const b= await user.find({ _id: req.params.id }).select('email -_id');
-    console.log(a,b[0].email);
-    if(a!=b[0].email){
-        const c=await User.em.find({email:a});
-        // console.log(c);
-        if(c.length!=0)return res.status(400).send("duplicate email");
-        else{
-             await new User.em({ email: a }).save();
-             const e = await User.em.findOne({ email: b[0].email }); 
-             console.log(e);
-             
-             if (e) {
-               await User.em.findByIdAndDelete(e._id); 
-             }
-    }
-
-    }
     await user.findByIdAndUpdate(req.params.id, req.body, {
         new: true,
       })
@@ -83,11 +97,8 @@ async function put(req,res,user){
 //------------------------------------------------------------------------------------------------------------
 async function delet(req,res,user){
     try{
-        const email=req.body.email;
+     
         await  user.findByIdAndDelete(req.params.id);
-        const e=await User.em.findOne({email:email});
-        if(e){
-        await User.em.findByIdAndDelete(e._id);}
         res.status(200).json(await user.find());
     }
     catch(error){

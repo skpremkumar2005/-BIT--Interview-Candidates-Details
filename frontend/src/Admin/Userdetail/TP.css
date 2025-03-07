@@ -1,0 +1,158 @@
+/* General styling */
+body {
+  font-family: "Poppins", sans-serif;
+  background-color: #f5f6fa;
+  margin: 0;
+  padding: 0;
+}
+
+/* Sidebar styling */
+
+.sidebar h2 {
+  color: #343a40;
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.sidebar ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.sidebar ul li {
+  margin: 15px 0;
+}
+
+.sidebar ul li a {
+  text-decoration: none;
+  color: #495057;
+  font-size: 16px;
+  display: block;
+  padding: 10px 15px;
+  border-radius: 10px;
+  transition: all 0.3s ease;
+}
+
+.sidebar ul li a:hover {
+  background-color: #5e6bff;
+  color: #ffffff;
+}
+
+.sidebar ul li a:hover,
+.sidebar ul li a.active {
+  background-color: #5e6bff;
+}
+
+/* Main content area */
+.main-content {
+  margin-left: 270px;
+  padding: 40px;
+  width: calc(100% - 270px);
+  background-color: #eceff1;
+  height: 100vh;
+  overflow-y: auto;
+}
+
+/* Intern details container */
+.intern-detail-container {
+  max-width: 900px;
+  background-color: #fff;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  overflow-y: auto;
+  max-height: 90vh;
+  margin: auto;
+}
+
+h2.header {
+  text-align: center;
+  color: #333;
+}
+
+h3 {
+  margin-top: 20px;
+  color: #2C3E50;
+}
+
+/* Labels */
+label {
+  font-weight: 500;
+  display: block;
+  margin-top: 10px;
+  color: #555;
+}
+
+/* Input Fields */
+input,
+select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+/* Buttons */
+.button-group {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.update-btn, .delete-btn {
+  flex: 1;
+  padding: 12px;
+  font-size: 16px;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.update-btn {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  margin-right: 10px;
+}
+
+.update-btn:hover {
+  background-color: #0056b3;
+}
+
+.delete-btn {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+}
+
+.delete-btn:hover {
+  background-color: #c82333;
+}
+
+/* Success & Error Messages */
+.status-message {
+  text-align: center;
+  font-weight: bold;
+  padding: 10px;
+  border-radius: 5px;
+  margin-top: 15px;
+}
+
+.success-message {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+.error-message {
+  background-color: #f8d7da;
+  color: #721c24;
+}
+
+/* Adjustments for date input */
+input[type="date"] {
+  padding: 8px;
+  font-size: 14px;
+}
