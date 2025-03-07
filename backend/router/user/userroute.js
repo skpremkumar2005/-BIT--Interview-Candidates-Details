@@ -32,9 +32,10 @@ async function getid(req, res, user) {
   }
 
 //-------------------------------------------------------------------------------------------------------------
-router.get('/',(req,res)=>{
-    res.send("i am user");
-})
+router.get('/',(req,res)=>{(req,res)=>{get(req,res,User.all)}})
+router.get('/:d',(req,res)=>{getid(req,res,User.all)})
+router.get('/domain',(req,res)=>{(req,res)=>{get(req,res,User.Domainlist)}})
+//-------------------------------------------------------------------------------------------------------------
 router.get('/t&p',(req,res)=>{get(req,res,User.TP)})
 router.get('/t&p/:id',(req,res)=>{getid(req,res,User.TP)})
 router.get('/iqac',(req,res)=>{get(req,res,User.iqac)})

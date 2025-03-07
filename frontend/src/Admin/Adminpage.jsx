@@ -1,16 +1,39 @@
-import React, { useState } from "react";
-import "./Adminpage.css"; // Ensure you create a separate CSS file for styling
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import "./Adminpage.css";
+import  List  from "./List";
 
 const Adminpage = () => {
-  // const [domains, setDomains] = useState(["PS", "T & P", "ELCC", "SPECIAL LAB", "DAY-SKILL"]);
-  const addDomain = () => {
+  const [domains, setDomains] = useState([]);
+  const [selectedDomain, setSelectedDomain] = useState(null);
+
+  // Fetch domains from backend
+  useEffect(() => {
+    const fetchDomains = async () => {
+      try {
+        const response = await axios.get("http://localhost:3000/admin/domain"); // Adjust API endpoint as needed
+        setDomains(response.data);
+      } catch (error) {
+        console.error("Error fetching domains:", error);
+      }
+    };
+    fetchDomains();
+  }, []);
+
+  // Add new domain
+  const addDomain = async () => {
     const domainName = prompt("Enter the new domain name:");
-    if (domainName && !domains.includes(domainName)) {
-      setDomains([...domains, domainName]);
+    if (!domainName) return;
+
+    try {
+      const response = await axios.post("http://localhost:3000/admin/domain", { Domain: domainName });
+      setDomains([...domains, response.data]); // Update UI with new domain
+    } catch (error) {
+      console.error("Error adding domain:", error);
+      alert("Failed to add domain!");
     }
   };
-
   return (
     <div className="dashboard-container">
       <aside className="sidebar">
@@ -19,32 +42,33 @@ const Adminpage = () => {
           <h1 className="title">Interns Portal</h1>
         </div>
         <ul>
-          <li><a>Dashboard</a></li>
-          <li><a>Domains</a></li>
-          <li><Link to="/admin/tp">tp</Link></li>
-         <li><Link to="/admin/ps">ps</Link></li>
-          <li><Link to="/admin/rp">rp</Link></li>
-          <li><Link to="/admin/iqac">iqac</Link></li>
-          <li><Link to="/admin/sl">sl</Link></li>
-          {/* <li><a href="#" onClick={addDomain}>+ Add Domain</a></li> */}
-          <li><Link to="/">Logout</Link></li>
+          <li><a onClick={() => setSelectedDomain(null)}>Dashboard</a></li>
+          {domains.map((domain) => (
+            <li key={domain._id} onClick={() => setSelectedDomain(domain.Domain)}>
+              <a>{domain.Domain}</a>
+            </li>
+          ))}
+          <li><a onClick={addDomain}>+ Add Domain</a></li>
+          <li><Link to="/internDashBoard">New DashBoard</Link></li>
         </ul>
       </aside>
 
-      <main className="main-content">
-        <div className="search-bar">
-          <input type="text" placeholder="Search using intern id..." />
-        </div>
 
-        <div className="dashboard">
-          <h1>Dashboard</h1>
-          <div className="card-container">
-          <Link to="/admin/tp">  <div className="card">T & P</div></Link>
-          <Link to="/admin/ps">  <div className="card">PS</div></Link>
-          <Link to="/admin/rp">  <div className="card">RP</div></Link>
-      <Link to="/admin/iqac">  <div className="card">IQAC</div></Link>
-      <Link to="/admin/sl">  <div className="card">SL</div></Link>          </div>
-        </div>
+      <main className="main-content">
+        {selectedDomain ? (
+          <List selectedDomain={selectedDomain} />
+        ) : (
+          <div className="dashboard">
+            <h1>Dashboard</h1>
+            <div className="card-container">
+              {domains.map((domain) => (
+                <div key={domain._id} className="card" onClick={() => setSelectedDomain(domain.Domain)}>
+                  <h3>{domain.Domain}</h3>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
       </main>
     </div>
   );

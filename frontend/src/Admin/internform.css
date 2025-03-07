@@ -1,0 +1,280 @@
+/* General form styling */
+.intern-form {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    /* Allow scrolling within the form */
+    max-height: 90vh;
+    overflow-y: auto;
+    /* Ensure proper scrollbar appearance */
+    scrollbar-width: thin;
+    scrollbar-color: #3498db #f9f9f9;
+  }
+  
+  /* Scrollbar styling for WebKit browsers (Chrome, Safari, etc.) */
+  .intern-form::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  .intern-form::-webkit-scrollbar-track {
+    background: #f9f9f9;
+  }
+  
+  .intern-form::-webkit-scrollbar-thumb {
+    background-color: #3498db;
+    border-radius: 4px;
+  }
+  
+  .intern-form h2 {
+    text-align: center;
+    color: #2c3e50;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #3498db;
+    /* Make the heading sticky for better navigation */
+    position: sticky;
+    top: 0;
+    background: #f9f9f9;
+    padding-top: 10px;
+    z-index: 10;
+  }
+  
+  .intern-form h3 {
+    color: #3498db;
+    margin-top: 20px;
+    margin-bottom: 15px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #e0e0e0;
+    /* Make section headers sticky for better navigation */
+    position: sticky;
+    top: 140px;
+    background: white;
+    padding-top: 10px;
+    z-index: 9;
+  }
+  
+  .intern-form h4 {
+    color: #2c3e50;
+    margin-top: 15px;
+    margin-bottom: 10px;
+  }
+  
+  /* Form sections */
+  .form-section {
+    background-color: white;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    /* Removed animation that might interfere with scrolling */
+    transition: box-shadow 0.3s ease;
+  }
+  
+  .form-section:hover {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Form groups */
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  .form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 500;
+    color: #555;
+  }
+  
+  /* Form inputs */
+  .intern-form input[type="text"],
+  .intern-form input[type="email"],
+  .intern-form input[type="tel"],
+  .intern-form input[type="number"],
+  .intern-form input[type="date"],
+  .intern-form select,
+  .intern-form textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+    transition: border-color 0.3s;
+    /* Prevent overflows */
+    box-sizing: border-box;
+  }
+  
+  .intern-form input:focus,
+  .intern-form select:focus,
+  .intern-form textarea:focus {
+    border-color: #3498db;
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+  }
+  
+  .intern-form textarea {
+    min-height: 80px;
+    resize: vertical;
+  }
+  
+  /* Checkbox styling */
+  .form-group.checkbox {
+    display: flex;
+    align-items: center;
+  }
+  
+  .form-group.checkbox label {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0;
+    cursor: pointer;
+  }
+  
+  .form-group.checkbox input[type="checkbox"] {
+    margin-right: 10px;
+    width: 18px;
+    height: 18px;
+  }
+  
+  /* Experience items */
+  .experience-item {
+    padding: 15px;
+    margin-bottom: 15px;
+    background-color: #f5f7fa;
+    border-radius: 5px;
+    border-left: 3px solid #3498db;
+  }
+  
+  /* Form actions */
+  .form-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+    /* Make action buttons sticky at the bottom */
+    position: sticky;
+    bottom: 0;
+    background: #f9f9f9;
+    padding: 15px 0;
+    z-index: 10;
+  }
+  
+  .form-actions button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.1s;
+  }
+  
+  .form-actions button[type="button"] {
+    background-color: #e74c3c;
+    color: white;
+  }
+  
+  .form-actions button[type="submit"] {
+    background-color: #2ecc71;
+    color: white;
+  }
+  
+  button[type="button"]:hover {
+    background-color: #c0392b;
+  }
+  
+  button[type="submit"]:hover {
+    background-color: #27ae60;
+  }
+  
+  button:active {
+    transform: scale(0.98);
+  }
+  
+  /* Add/Remove experience buttons */
+  .form-section button[type="button"] {
+    padding: 8px 15px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    margin-top: 10px;
+    cursor: pointer;
+    font-size: 14px;
+  }
+  
+  .experience-item button[type="button"] {
+    background-color: #e74c3c;
+    margin-top: 15px;
+  }
+  
+  .form-section button[type="button"]:hover {
+    background-color: #2980b9;
+  }
+  
+  .experience-item button[type="button"]:hover {
+    background-color: #c0392b;
+  }
+  
+  /* Section navigation */
+  .form-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 20px;
+    position: sticky;
+    top: 60px;
+    background: #f9f9f9;
+    padding: 10px 0;
+    z-index: 20;
+    border-bottom: 1px solid #e0e0e0;
+  }
+  
+  .form-nav button {
+    padding: 5px 10px;
+    background-color: #ecf0f1;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+    transition: all 0.2s;
+  }
+  
+  .form-nav button:hover,
+  .form-nav button.active {
+    background-color: #3498db;
+    color: white;
+    border-color: #3498db;
+  }
+  
+  /* Responsive design */
+  @media (max-width: 768px) {
+    .intern-form {
+      padding: 15px;
+      max-height: 85vh; /* Smaller max-height on mobile */
+    }
+    
+    .form-actions {
+      flex-direction: column;
+      gap: 10px;
+    }
+    
+    .form-actions button {
+      width: 100%;
+    }
+  }
+  
+  /* Helper classes */
+  .required:after {
+    content: " *";
+    color: #e74c3c;
+  }
+  
+  /* Field validation styles */
+  .intern-form input:invalid,
+  .intern-form select:invalid,
+  .intern-form textarea:invalid {
+    border-color: #e74c3c;
+  }

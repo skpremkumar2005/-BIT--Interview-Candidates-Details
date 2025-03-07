@@ -5,9 +5,13 @@ const mongoose=require('mongoose');
     password:{type:String},
     role:{type:String},
  })
+ const DomainList = new mongoose.Schema({
+   Domain: { type: String, unique: true, required: true }
+  });
+  const Domainlist=mongoose.model('DomainList',DomainList);
  const Domain=new mongoose.Schema({
-   
-      personal_details: {
+       Domain: { type: String, required: true, ref: "Domainlist" }, // Referencing DomainList
+       personal_details: {
         full_name: { type: String, required: true },
         dob: { type: Date, required: true },
         gender: { type: String, enum: ["Male", "Female", "Other"], required: true },
@@ -74,21 +78,13 @@ const mongoose=require('mongoose');
     },
     { timestamps: true }
  )
-//  const Email=new mongoose.Schema({email:{type:String}})
- const Id=new mongoose.Schema({Id:{type:String}})
+ const all=mongoose.model('all',Domain);
 
  const user=mongoose.model('User',userschema);
- const TP=mongoose.model('T&P',Domain);
- const iqac=mongoose.model('iqac',Domain);
- const ps=mongoose.model('ps',Domain);
- const dc=mongoose.model('dc',Domain);
- const rp=mongoose.model('rp',Domain);
- const sp=mongoose.model('sp',Domain);
-//  const em=mongoose.model('Email',Email);
- const id=mongoose.model('id',Id);
+
 
 
 
 
  
- module.exports={user,TP,iqac,ps,dc,rp,sp,id};
+ module.exports={user,all,Domainlist};
