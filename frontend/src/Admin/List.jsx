@@ -368,7 +368,7 @@ const List = ({ selectedDomain }) => {
                       </span>
                     )}
                   </th>
-                  <th>Actions</th>
+              
                 </tr>
               </thead>
               <tbody>
@@ -401,7 +401,7 @@ const List = ({ selectedDomain }) => {
                     <td>{intern.personal_details.email}</td>
                     <td>{intern.personal_details.contact_number}</td>
                     <td>{intern.personal_details.gender}</td>
-                    <td>
+                    {/* <td>
                       <div className="action-buttons">
                         <button 
                           className="view-button"
@@ -412,17 +412,9 @@ const List = ({ selectedDomain }) => {
                         >
                           View
                         </button>
-                        <button 
-                          className="edit-button"
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            navigate(`/edit/${intern._id}`);
-                          }}
-                        >
-                          Edit
-                        </button>
+                        
                       </div>
-                    </td>
+                    </td> */}
                   </tr>
                 ))}
               </tbody>

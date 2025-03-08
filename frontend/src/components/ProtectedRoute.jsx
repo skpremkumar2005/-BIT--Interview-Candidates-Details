@@ -3,14 +3,14 @@ import { useAuth } from '../context/AuthContext';
 
 // Protected route that checks for the required role
 const ProtectedRoute = ({ requiredRole }) => {
-  const { role } = useAuth();  // Get the current user role
+  const { role } = useAuth();  
+  const storedRole = localStorage.getItem('role'); // Retrieve role from localStorage
 
-  if (role !== requiredRole) {
-    // If the user doesn't have the required role, redirect to login
+  if (!storedRole || storedRole !== requiredRole) {
     return <Navigate to="/" />;
   }
 
-  return <Outlet />;  // Render the protected routes if the role is valid
+  return <Outlet />;
 };
 
 export default ProtectedRoute;
