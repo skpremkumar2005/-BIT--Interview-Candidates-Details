@@ -421,6 +421,7 @@ const List = ({ selectedDomain }) => {
             </table>
           </div>
           
+          
           {/* Pagination */}
           {totalPages > 1 && (
             <div className="pagination">
